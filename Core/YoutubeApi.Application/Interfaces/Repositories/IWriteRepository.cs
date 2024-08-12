@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace YoutubeApi.Domain.Common
+namespace YoutubeApi.Application.Interfaces.Repositories
 {
-    public interface IEntityBase
+    public interface IWriteRepository
     {
     }
 }

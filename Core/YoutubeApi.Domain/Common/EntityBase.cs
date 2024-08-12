@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace YoutubeApi.Domain.Common
 {
-    public class EntityBase : IEntityBase
+    public class EntityBase :IEntityBase
     {
         public int id { get; set; }
         public DateTime CreatedDate { get; set; }= DateTime.Now;
