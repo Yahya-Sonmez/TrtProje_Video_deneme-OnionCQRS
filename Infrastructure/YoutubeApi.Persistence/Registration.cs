@@ -16,8 +16,12 @@ namespace YoutubeApi.Persistence
     {
         public static void AddPersistence(this IServiceCollection services,IConfiguration configuration)
         {
-            services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<AppDbContext>(opt =>
+            opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+
             services.AddScoped(typeof(IReadRepository<>),typeof(ReadRepository<>));
+            services.AddScoped(typeof(IWriteRepository<>), typeof(WriteRepository<>));
+
         }
     }
 }
