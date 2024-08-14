@@ -9,7 +9,7 @@ using YoutubeApi.Domain.Entities;
 
 namespace YoutubeApi.Application.Features.Products.Command.CreateProduct
 {
-    internal class CreateProductCommandHandler : IRequestHandler<CreateProductCommandRequest>
+    internal class CreateProductCommandHandler : IRequestHandler<CreateProductCommandRequest,Unit>
     {
         private readonly IUnitOfWork unitOfWork;
 
@@ -18,9 +18,9 @@ namespace YoutubeApi.Application.Features.Products.Command.CreateProduct
             this.unitOfWork = unitOfWork;
         }
 
-        public async Task Handle(CreateProductCommandRequest request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(CreateProductCommandRequest request, CancellationToken cancellationToken)
         {
-            Product product = new(request.Title,request.Description,request.BrandId,request.Price,request.Discount);
+            Product product = new(request.Title, request.Description, request.BrandId, request.Price, request.Discount);
 
             await unitOfWork.GetWriteRepository<Product>().AddAsync(product);
             if(await unitOfWork.SaveAsync() > 0)
@@ -35,6 +35,7 @@ namespace YoutubeApi.Application.Features.Products.Command.CreateProduct
                     await unitOfWork.SaveAsync();
                 }
             }
+            return Unit.Value;
         }
     }
 }
